@@ -1,12 +1,18 @@
 ##Linux命令行  
-###前言  
+### 前言  
 本文档会不断更新和完善。  
 若您发现错误的地方，欢迎及时在线提交，方便我们修正并更好供大家使用。  
 `快捷键 Ctrl+F 进行搜索`  
   
 [TOC]
   
-###系统信息  
+### 公钥私钥  
+| 命令 | 说明 |
+|--------|--------|
+| \# ssh-keygen -t rsa -C "邮箱地址" | 产生公钥私钥对 |
+| \# ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.0.2  | 将本地机器的公钥复制到远程机器的authorized_keys文件中 |
+| \# ssh-keygen -p -f ~/.ssh/id_rsa | 添加或修改SSH-key的私钥密码 |
+### 系统信息  
 | 命令 | 说明 |
 |--------|--------|
 |\# arch|显示机器的处理器架构|
@@ -29,7 +35,7 @@
 |\# uname \-m|显示机器的处理器架构|
 |\# uname \-r|显示正在使用的内核版本|
   
-###关机  
+### 关机  
 | 命令 | 说明 |
 |--------|--------|
 |\# init 0|关闭系统|
@@ -41,7 +47,7 @@
 |\# shutdown \-r now|重启|
 |\# telinit 0|关闭系统|
   
-###文件和目录  
+### 文件和目录  
 | 命令 | 说明 |
 |--------|--------|
 |\# cd /home|进入 '/home' 目录|
@@ -78,7 +84,7 @@
 |\# touch \-t 1607230000 file1|修改一个文件或目录的时间戳 \- \(YYMMDDhhmm\)|
 |\# tree|显示文件和目录由根目录开始的树形结构|
   
-###文件搜索  
+### 文件搜索  
 | 命令 | 说明 |
 |--------|--------|
 |\# find / \-name file1|从 '/' 开始进入根文件系统搜索文件和目录|
@@ -92,7 +98,7 @@
 |\# whereis halt|显示一个二进制文件、源码或man的位置|
 |\# which halt|显示一个二进制文件或可执行文件的完整路径|
   
-###挂载一个文件系统  
+### 挂载一个文件系统  
 | 命令 | 说明 |
 |--------|--------|
 |\# fuser \-km /mnt/hda2|当设备繁忙时强制卸载|
@@ -108,7 +114,7 @@
 |\# umount /dev/hda2|卸载一个叫做hda2的盘 \- 先从挂载点 '/mnt/hda2' 退出|
 |\# umount \-n /mnt/hda2|运行卸载操作而不写入 /etc/mtab 文件\- 当文件为只读或当磁盘写满时非常有用|
   
-###磁盘空间  
+### 磁盘空间  
 | 命令 | 说明 |
 |--------|--------|
 |\# df \-h|显示已经挂载的分区列表|
@@ -118,7 +124,7 @@
 |\# ls \-lSr &#124; more|以尺寸大小排列文件和目录|
 |\# rpm \-q \-a \-\-qf '%10\{SIZE\}t%\{NAME\}n' &#124; sort \-k1,1n|以大小为依据依次显示已安装的rpm包所使用的空间 \(centos, redhat, fedora类系统\)|
   
-###用户和群组  
+### 用户和群组  
 | 命令 | 说明 |
 |--------|--------|
 |\# chage \-E 2016\-12\-31 user1|设置用户口令的失效期限|
@@ -135,7 +141,7 @@
 |\# userdel \-r user1|删除一个用户 \( '\-r' 排除主目录\)|
 |\# usermod \-c "User FTP" \-g system \-d /ftp/user1 \-s /bin/nologin user1|修改用户属性|
   
-###文件的权限  
+### 文件的权限  
 | 命令 | 说明 |
 |--------|--------|
 |\# chgrp group1 file1|改变文件的群组|
@@ -154,7 +160,7 @@
 |\# ls \-lh|显示权限|
 |\# ls /tmp &#124; pr \-T5 \-W$COLUMNS|将终端划分成5栏显示|
   
-###文件的特殊属性  
+### 文件的特殊属性  
 | 命令 | 说明 |
 |--------|--------|
 |\# chattr \+a file1|只允许以追加方式读写文件|
@@ -166,7 +172,7 @@
 |\# chattr \+u file1|若文件被删除，系统会允许你在以后恢复这个被删除的文件|
 |\# lsattr|显示特殊的属性|
   
-###打包和压缩文件  
+### 打包和压缩文件  
 | 命令 | 说明 |
 |--------|--------|
 |\# bunzip2 file1\.bz2|解压一个叫做 'file1\.bz2'的文件|
@@ -191,7 +197,7 @@
 |\# zip file1\.zip file1|创建一个zip格式的压缩包|
 |\# zip \-r file1\.zip file1 file2 dir1|将几个文件和目录同时压缩成一个zip格式的压缩包|
   
-###RPM包 \(Fedora,RedHat and alike\)  
+### RPM包 \(Fedora,RedHat and alike\)  
 | 命令 | 说明 |
 |--------|--------|
 |\# rpm \-ivh \[package\.rpm\]|安装一个rpm包|
@@ -221,7 +227,7 @@
 |\# rpm2cpio \[package\.rpm\] &#124; cpio \-\-extract \-\-make\-directories \*bin\*|从一个rpm包运行可执行文件|
 |\# rpmbuild \-\-rebuild \[package\.src\.rpm\]|从一个rpm源码构建一个 rpm 包|
   
-###YUM 软件工具 \(Fedora,RedHat and alike\)  
+### YUM 软件工具 \(Fedora,RedHat and alike\)  
 | 命令 | 说明 |
 |--------|--------|
 |\# yum \-y install \[package\]|下载并安装一个rpm包|
@@ -236,7 +242,7 @@
 |\# yum clean headers|删除所有头文件|
 |\# yum clean all|删除所有缓存的包和头文件|
   
-###DEB 包 \(Debian, Ubuntu and alike\)  
+### DEB 包 \(Debian, Ubuntu and alike\)  
 | 命令 | 说明 |
 |--------|--------|
 |\# dpkg \-i \[package\.deb\]|安装/更新一个 deb 包|
@@ -248,7 +254,7 @@
 |\# dpkg \-\-contents \[package\.deb\]|显示尚未安装的一个包所提供的文件列表|
 |\# dpkg \-S /bin/ping|确认所给的文件由哪个deb包提供|
   
-###APT 软件工具 \(Debian, Ubuntu and alike\)  
+### APT 软件工具 \(Debian, Ubuntu and alike\)  
 | 命令 | 说明 |
 |--------|--------|
 |\# apt\-cache search \[package\]|返回包含所要搜索字符串的软件包名称|
@@ -260,13 +266,13 @@
 |\# apt\-get check|确认依赖的软件仓库正确|
 |\# apt\-get clean|从下载的软件包中清理缓存|
   
-###Pacman 软件工具 \(Arch, Frugalware and alike\)  
+### Pacman 软件工具 \(Arch, Frugalware and alike\)  
 | 命令 | 说明 |
 |--------|--------|
 |\# pacman \-S name|根据依赖关系安装名为“name“的软件包|
 |\# pacman \-R name|删除软件包”name" 及其所以文件|
   
-###查看文件内容  
+### 查看文件内容  
 | 命令 | 说明 |
 |--------|--------|
 |\# cat file1|从第一个字节开始正向查看文件的内容|
@@ -277,7 +283,7 @@
 |\# tail \-2 file1|查看一个文件的最后两行|
 |\# tail \-f /var/log/messages|实时查看被添加到一个文件中的内容|
   
-###文本处理  
+### 文本处理  
 | 命令 | 说明 |
 |--------|--------|
 |\# cat example\.txt &#124; awk 'NR%2==1'|删除example\.txt文件中的所有偶数行|
@@ -311,7 +317,7 @@
 |\# sort file1 file2 &#124; uniq \-d|取出两个文件的交集\(只留下同时存在于两个文件中的文件\)|
 |\# echo 'word' &#124; tr '\[:lower:\]' '\[:upper:\]'|合并上下单元格内容|
   
-###字符设置和文件格式  
+### 字符设置和文件格式  
 | 命令 | 说明 |
 |--------|--------|
 |\# dos2unix filedos\.txt fileunix\.txt|将一个文本文件的格式从MSDOS转换成UNIX|
@@ -319,7 +325,7 @@
 |\# recode \-l &#124; more|显示所有允许的转换格式|
 |\# unix2dos fileunix\.txt filedos\.txt|将一个文本文件的格式从UNIX转换成MSDOS|
   
-###文件系统分析  
+### 文件系统分析  
 | 命令 | 说明 |
 |--------|--------|
 |\# badblocks \-v /dev/hda1|检查磁盘hda1上的坏磁块|
@@ -332,7 +338,7 @@
 |\# fsck\.vfat /dev/hda1|修复/检查hda1磁盘上fat文件系统的完整性|
 |\# fsck\.msdos /dev/hda1|修复/检查hda1磁盘上dos文件系统的完整性|
   
-###初始化一个文件系统  
+### 初始化一个文件系统  
 | 命令 | 说明 |
 |--------|--------|
 |\# fdformat \-n /dev/fd0|格式化一个软盘|
@@ -342,14 +348,14 @@
 |\# mkfs \-t vfat 32 \-F /dev/hda1|创建一个 FAT32 文件系统|
 |\# mkswap /dev/hda3|创建一个swap文件系统|
   
-###SWAP 文件系统  
+### SWAP 文件系统  
 | 命令 | 说明 |
 |--------|--------|
 |\# mkswap /dev/hda3|创建一个swap文件系统|
 |\# swapon /dev/hda3|启用一个新的swap文件系统|
 |\# swapon /dev/hda2 /dev/hdb3|启用两个swap分区|
   
-###备份  
+### 备份  
 | 命令 | 说明 |
 |--------|--------|
 |\# find /var/log \-name '\*\.log' &#124; tar cv \-\-files\-from=\- &#124; bzip2 > log\.tar\.bz2|查找所有以 '\.log' 结尾的文件并做成一个bzip包|
@@ -370,7 +376,7 @@
 |\# \( tar c /home \) &#124; ssh \-C user@ip\_addr 'cd /home/backup\-home && tar x \-p'|通过ssh在远程目录中复制一个本地目录|
 |\# tar cf \- \. &#124; \(cd /tmp/backup ; tar xf \- \)|本地将一个目录复制到另一个地方，保留原有权限及链接|
   
-###光盘  
+### 光盘  
 | 命令 | 说明 |
 |--------|--------|
 |\# cd\-paranoia \-B|从一个CD光盘转录音轨到 wav 文件中|
@@ -385,7 +391,7 @@
 |\# mkisofs \-J \-allow\-leading\-dots \-R \-V|创建一个目录的iso镜像文件|
 |\# mount \-o loop cd\.iso /mnt/iso|挂载一个ISO镜像文件|
   
-###网络 \(LAN / WiFi\)  
+### 网络 \(LAN / WiFi\)  
 | 命令 | 说明 |
 |--------|--------|
 |\# dhclient eth0|以dhcp模式启用 'eth0' 网络设备|
@@ -413,7 +419,7 @@
 |\# tcpdump tcp port 80|显示所有 HTTP回环|
 |\# whois www\.example\.com|在 Whois 数据库中查找|
   
-###Microsoft windows 网络 \(samba\)  
+### Microsoft windows 网络 \(samba\)  
 | 命令 | 说明 |
 |--------|--------|
 |\# mount \-t smbfs \-o username=user,password=pass //WinClient/share /mnt/share|挂载一个windows网络共享|
@@ -422,7 +428,7 @@
 |\# smbclient \-L ip\_addr/hostname|显示一台windows主机的远程共享|
 |\# smbget \-Rr smb://ip\_addr/share|像wget一样能够通过smb从一台windows主机上下载文件|
   
-###IPTABLES \(firewall\)  
+### IPTABLES \(firewall\)  
 | 命令 | 说明 |
 |--------|--------|
 |\# iptables \-t filter \-L|显示过滤表的所有链路|
@@ -437,7 +443,7 @@
 |\# iptables \-t nat \-A POSTROUTING \-o eth0 \-j MASQUERADE|设置一个 PAT \(端口地址转换\) 在 eth0 掩盖发出包|
 |\# iptables \-t nat \-A PREROUTING \-d 192\.168\.0\.1 \-p tcp \-m tcp \-\-dport 22 \-j DNAT \-\-to\-destination 10\.0\.0\.2:22|将发往一个主机地址的包转向到其他主机|
   
-###监视和调试  
+### 监视和调试  
 | 命令 | 说明 |
 |--------|--------|
 |\# free \-m|以兆为单位罗列RAM状态|
@@ -459,7 +465,7 @@
 |\# top|罗列使用CPU资源最多的linux任务|
 |\# watch \-n1 'cat /proc/interrupts'|罗列实时中断|
   
-###其他  
+### 其他  
 | 命令 | 说明 |
 |--------|--------|
 |\# alias hh='history'|为命令history\(历史\)设置一个别名|
@@ -480,5 +486,6 @@
 完毕！  
   
 【参考资料】  
-www.linuxguide.it  
+[http://www.linuxguide.it](http://www.linuxguide.it)  
+[http://man.linuxde.net](http://man.linuxde.net)  
   
