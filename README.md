@@ -12,6 +12,7 @@
 | \# ssh-keygen -t rsa -C "邮箱地址" | 产生公钥私钥对 |
 | \# ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.0.2  | 将本地机器的公钥复制到远程机器的authorized_keys文件中 |
 | \# ssh-keygen -p -f ~/.ssh/id_rsa | 添加或修改SSH-key的私钥密码 |
+| \# ssh-keygen -y -f ~/.ssh/id_rsa > id_rsa.pub | 从私钥中生成公钥 |
 ### 系统信息  
 | 命令 | 说明 |
 |--------|--------|
