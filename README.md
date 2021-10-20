@@ -13,6 +13,7 @@
 | \# ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.0.2  | 将本地机器的公钥复制到远程机器的root用户的authorized_keys文件中 |
 | \# ssh-keygen -p -f ~/.ssh/id_rsa | 添加或修改SSH-key的私钥密码 |
 | \# ssh-keygen -y -f ~/.ssh/id_rsa > id_rsa.pub | 从私钥中生成公钥 |
+| \# ssh-keygen -R 192.168.2.8 | 从known_hosts文件中删除公钥信息 |
 ### 系统信息  
 | 命令 | 说明 |
 |--------|--------|
